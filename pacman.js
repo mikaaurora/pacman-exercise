@@ -11,7 +11,7 @@ function Run() {
   let img = document.getElementById('PacMan')
   let imgWidth = img.width
   focus = (focus + 1) % 2
-  direction = checkPageBounds(direction, imgWidth)
+  direction = checkPageBounds(direction, imgWidth, pos, pageWidth)
   img.src = pacArray[direction][focus]
   if (direction) {
     pos -= 20
@@ -20,17 +20,22 @@ function Run() {
     pos += 20
     img.style.left = pos + 'px'
   }
-  // Use setTimeout to call Run every 1000 millesecs
-
-  setInterval(Run, 1000, pos, pageWidth)
+  // Use setTimeout to call Run every 300 millesecs
 }
 
-function checkPageBounds(direction, imgWidth) {
+// setInterval(Run, 300)
+
+function checkPageBounds(direction, imgWidth, pos, pageWidth) {
   //
   // Complete this to reverse direction on hitting page bounds
   //
-  if (direction === 0 && pos + imgWidth > pageWidth) direction = 1
-  if (direction === 1 && pos < 0) direction = 0
+  if (pos + imgWidth > pageWidth) {
+    direction = 1
+  } else if (pos < 0) {
+    direction = 0
+  }
 
   return direction
 }
+
+checkPageBounds()
